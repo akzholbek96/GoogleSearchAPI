@@ -1,0 +1,27 @@
+public class SerpCallOut {
+    
+     @AuraEnabled(cacheable=false)
+    public static String sertCall(string query){
+        
+        HttpRequest req = new HttpRequest();
+        req.setEndpoint('https://serpapi.com/search.json?engine=google&tbm=isch&num=1&q='+query+'&api_key=Here should be your key');
+        req.setMethod('GET');
+        
+        Http http = new Http();
+        HTTPResponse res = http.send(req);
+        system.debug(res);
+        Map<String, Object> m = (Map<String, Object>) JSON.deserializeUntyped(res.getBody());
+        List<Object> m2 = (List<Object>) m.get('images_results');
+        Map<String, Object> firstMap = (Map<String, Object>)m2[0];
+        String imageUrl = (String)firstMap.get('thumbnail');
+        system.debug(imageUrl);
+        
+        if(imageUrl != null && imageUrl.length() > 0){
+            return imageUrl;
+        }else{
+            return 'NoResponse found';
+        }
+         
+    }
+
+}
