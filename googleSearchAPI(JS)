@@ -9,7 +9,7 @@ export default class SearchGoogleSerpApi extends LightningElement {
     this.searchQuery = event.target.value.replace(/\s/g, "+");
   }
   searchHandler() {
-    serpApi({
+    sertCall({
       query: this.searchQuery
     })
       .then((response) => {
