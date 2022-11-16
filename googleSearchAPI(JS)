@@ -1,5 +1,5 @@
 import { LightningElement } from "lwc";
-import serpApi from "@salesforce/apex/serpApi.serpCall";
+import serpApi from "@salesforce/apex/SerpCallOut.serpCall";
 
 export default class SearchGoogleSerpApi extends LightningElement {
   imageLink;
